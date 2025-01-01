@@ -10,113 +10,143 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
+            background-color: #121212;
             height: 100vh;
-            background-color: #1e1e1e;
-            overflow: hidden; /* Prevent body overflow */
+            overflow: auto;
         }
+
         .panel {
-            width: 400px;
-            background-color: #2c2f38;
+            width: 90%;
+            max-width: 1200px;
+            background-color: #1d1d1d;
             color: white;
+            margin: 20px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            text-align: center;
-            position: relative;
-            overflow-y: auto; /* Enable scrolling inside the panel */
-            max-height: 90vh; /* Limit the height to 90% of the viewport */
+            border-radius: 15px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
         }
-        .panel h2 {
-            margin: 0 0 20px;
-            font-size: 24px;
+
+        h2, h3 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
+
         .logo {
-            width: 100px; /* Increase logo size */
-            height: 100px; /* Increase logo size */
+            width: 120px;
+            height: 120px;
             position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000; /* Ensure it stays above other content */
+            top: 20px;
+            left: 20px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
+
         .button-container {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
         }
+
         .button-container button {
-            padding: 12px;
+            padding: 15px;
             background-color: #444;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
+
         .button-container button:hover {
             background-color: #555;
+            transform: scale(1.05);
         }
-        .on-off-toggle {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 120px;
-            background-color: #444;
-            border-radius: 20px;
-            padding: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+
+        .section {
+            display: none;
         }
-        .on-off-toggle.active {
-            background-color: #5cb85c;
+
+        .active-section {
+            display: block;
         }
-        .on-off-toggle.inactive {
-            background-color: #d9534f;
-        }
-        .on-off-toggle span {
-            padding: 8px;
-            font-weight: bold;
-            color: white;
-            transition: opacity 0.3s ease;
-        }
+
         .feature-container {
             margin-top: 20px;
-            text-align: left;
+            padding: 10px;
         }
+
+        .feature-container div {
+            margin-bottom: 15px;
+        }
+
+        .feature-container span {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
         .feature-description {
-            font-size: 12px;
+            font-size: 14px;
             color: #bbb;
         }
+
+        .toggle-text {
+            font-size: 16px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .toggle-text.on {
+            color: #5cb85c;
+        }
+
+        .toggle-text.off {
+            color: #d9534f;
+        }
+
         .key-input-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            padding: 30px;
-            background-color: #2c2f38;
-            border-radius: 10px;
+            gap: 30px;
+            padding: 40px;
+            background-color: #1d1d1d;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
+
         .key-input-container input {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #444;
-            border-radius: 5px;
+            border-radius: 10px;
             color: white;
             background-color: #333;
-            width: 250px;
+            width: 280px;
+            font-size: 16px;
         }
+
         .key-input-container button {
-            padding: 12px;
+            padding: 14px;
             background-color: #444;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             color: white;
+            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
+
         .key-input-container button:hover {
             background-color: #555;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -125,195 +155,160 @@
 <!-- Key Input Section -->
 <div id="key-input-section" class="key-input-container">
     <h2>Enter Key</h2>
-    <input type="text" id="key-input" placeholder="Enter the key">
+    <input type="text" id="key-input" placeholder="Enter the key" autofocus>
     <button onclick="checkKey()">Submit</button>
-    
 </div>
 
 <!-- Control Panel Section (Initially Hidden) -->
 <div id="control-panel" class="panel" style="display: none;">
+
     <img src="https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/eee3b561-39fb-4a2b-4d52-477067ef7700/avatar" alt="Logo" class="logo">
-    <h2>Xware control Panel</h2>
+    <h2>Xware Control Panel</h2>
 
     <div class="button-container">
-        <button onclick="showPage('aimbot')">Aimbot</button>
-        <button onclick="showPage('esp')">ESP</button>
-        <button onclick="showPage('misc')">Miscellaneous</button>
+        <button onclick="showPage('aimbot')">🔥 Aimbot Enhancements</button>
+        <button onclick="showPage('esp')">🎯 ESP (Tracker)</button>
+        <button onclick="showPage('misc')">⚡ Miscellaneous Tools</button>
     </div>
 
     <!-- Aimbot Section -->
-    <div id="aimbot" class="feature-container">
-        <h3>Aimbot Key Features</h3>
-        <div>
-            <span>Enable/Disable Aimbot</span>
-            <div id="aimbot-enable" class="on-off-toggle inactive" onclick="toggleFeature('aimbot-enable')">
-                <span class="inactive">OFF</span>
+    <div id="aimbot" class="section active-section">
+        <h3>🔥 Aimbot Enhancements</h3>
+        <div class="feature-container">
+            <div>
+                <span>Enable/Disable Aimbot</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Full control over enabling or disabling the aimbot.</div>
             </div>
-            <div class="feature-description">Enable or disable the aimbot.</div>
-        </div>
-        <div>
-            <span>Visibility Check</span>
-            <div id="visibility-check" class="on-off-toggle inactive" onclick="toggleFeature('visibility-check')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Visibility Check</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Target only what's visible.</div>
             </div>
-            <div class="feature-description">Target only visible enemies.</div>
-        </div>
-        <div>
-            <span>Triggerbot</span>
-            <div id="triggerbot" class="on-off-toggle inactive" onclick="toggleFeature('triggerbot')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Triggerbot</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Automated shooting for precise action.</div>
             </div>
-            <div class="feature-description">Automated shooting for precise action.</div>
-        </div>
-        <div>
-            <span>Draw FOV</span>
-            <div id="draw-fov" class="on-off-toggle inactive" onclick="toggleFeature('draw-fov')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Draw FOV</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Customizable targeting areas.</div>
             </div>
-            <div class="feature-description">Customizable targeting areas.</div>
-        </div>
-        <div>
-            <span>Prediction Aimbot</span>
-            <div id="prediction-aimbot" class="on-off-toggle inactive" onclick="toggleFeature('prediction-aimbot')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Prediction Aimbot</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Track moving targets with predictive aiming.</div>
             </div>
-            <div class="feature-description">Track moving targets efficiently.</div>
-        </div>
-        <div>
-            <span>Ignore Knocked Players</span>
-            <div id="ignore-knocked" class="on-off-toggle inactive" onclick="toggleFeature('ignore-knocked')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Ignore Knocked Players</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Improve efficiency by ignoring knocked players.</div>
             </div>
-            <div class="feature-description">Ignore knocked players for better efficiency.</div>
-        </div>
-        <div>
-            <span>Weapon-only Targeting</span>
-            <div id="weapon-targeting" class="on-off-toggle inactive" onclick="toggleFeature('weapon-targeting')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Weapon-only Targeting</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Target only with the selected weapon.</div>
             </div>
-            <div class="feature-description">Target only weapon-holding players.</div>
         </div>
     </div>
 
     <!-- ESP Section -->
-    <div id="esp" class="feature-container" style="display:none;">
-        <h3>ESP Key Features</h3>
-        <div>
-            <span>Boxes</span>
-            <div id="esp-boxes" class="on-off-toggle inactive" onclick="toggleFeature('esp-boxes')">
-                <span class="inactive">OFF</span>
+    <div id="esp" class="section">
+        <h3>🎯 ESP (Tracker)</h3>
+        <div class="feature-container">
+            <div>
+                <span>Boxes</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Visual boxes around enemies.</div>
             </div>
-            <div class="feature-description">Visual boxes around enemies.</div>
-        </div>
-        <div>
-            <span>Lines</span>
-            <div id="esp-lines" class="on-off-toggle inactive" onclick="toggleFeature('esp-lines')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Lines</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Track opponent movements.</div>
             </div>
-            <div class="feature-description">Track movements with lines.</div>
-        </div>
-        <div>
-            <span>Skeleton</span>
-            <div id="esp-skeleton" class="on-off-toggle inactive" onclick="toggleFeature('esp-skeleton')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Skeleton</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Show detailed positioning of opponents.</div>
             </div>
-            <div class="feature-description">Detailed positioning of enemies.</div>
-        </div>
-        <div>
-            <span>Nickname</span>
-            <div id="esp-nickname" class="on-off-toggle inactive" onclick="toggleFeature('esp-nickname')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Nickname</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Display enemy nicknames for intel.</div>
             </div>
-            <div class="feature-description">Display enemy nicknames.</div>
-        </div>
-        <div>
-            <span>Distance</span>
-            <div id="esp-distance" class="on-off-toggle inactive" onclick="toggleFeature('esp-distance')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Distance Measurement</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Measure the distance to opponents.</div>
             </div>
-            <div class="feature-description">Measure distance to enemies.</div>
-        </div>
-        <div>
-            <span>Weapon</span>
-            <div id="esp-weapon" class="on-off-toggle inactive" onclick="toggleFeature('esp-weapon')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Weapon Identification</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Identify enemy weapons for strategic decisions.</div>
             </div>
-            <div class="feature-description">Show weapons of enemies.</div>
-        </div>
-        <div>
-            <span>Rank</span>
-            <div id="esp-rank" class="on-off-toggle inactive" onclick="toggleFeature('esp-rank')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Rank Display</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Show rank of enemies for evaluating opponents.</div>
             </div>
-            <div class="feature-description">Display enemy rank.</div>
-        </div>
-        <div>
-            <span>Snapline</span>
-            <div id="esp-snapline" class="on-off-toggle inactive" onclick="toggleFeature('esp-snapline')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Snapline</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Trace the closest threats with a snapline.</div>
             </div>
-            <div class="feature-description">Trace closest enemies.</div>
         </div>
     </div>
 
     <!-- Miscellaneous Section -->
-    <div id="misc" class="feature-container" style="display:none;">
-        <h3>Miscellaneous Tools</h3>
-        <div>
-            <span>Outlined ESP</span>
-            <div id="outlined-esp" class="on-off-toggle inactive" onclick="toggleFeature('outlined-esp')">
-                <span class="inactive">OFF</span>
+    <div id="misc" class="section">
+        <h3>⚡ Miscellaneous Tools</h3>
+        <div class="feature-container">
+            <div>
+                <span>Outlined ESP</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Clear ESP visualization for better focus.</div>
             </div>
-            <div class="feature-description">Clear ESP visualization.</div>
-        </div>
-        <div>
-            <span>Head Circle</span>
-            <div id="head-circle" class="on-off-toggle inactive" onclick="toggleFeature('head-circle')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Head Circle</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Pinpoint enemy head positions.</div>
             </div>
-            <div class="feature-description">Pinpoint head tracking.</div>
-        </div>
-        <div>
-            <span>Weapon Rarity</span>
-            <div id="weapon-rarity" class="on-off-toggle inactive" onclick="toggleFeature('weapon-rarity')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Weapon Rarity</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Identify the rarity of weapons for better loot decisions.</div>
             </div>
-            <div class="feature-description">Identify weapon rarity.</div>
-        </div>
-        <div>
-            <span>Crosshair</span>
-            <div id="crosshair" class="on-off-toggle inactive" onclick="toggleFeature('crosshair')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Crosshair</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Customizable crosshair for accurate aiming.</div>
             </div>
-            <div class="feature-description">Enable crosshair for aiming.</div>
-        </div>
-        <div>
-            <span>Skeleton Thickness</span>
-            <div id="skeleton-thickness" class="on-off-toggle inactive" onclick="toggleFeature('skeleton-thickness')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Skeleton Thickness</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Adjust the thickness of the skeleton outline.</div>
             </div>
-            <div class="feature-description">Adjust thickness of skeleton lines.</div>
-        </div>
-        <div>
-            <span>Box & Line Thickness</span>
-            <div id="box-line-thickness" class="on-off-toggle inactive" onclick="toggleFeature('box-line-thickness')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Box and Line Thickness</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Adjust the thickness of the ESP boxes and lines.</div>
             </div>
-            <div class="feature-description">Customize box and line thickness.</div>
-        </div>
-        <div>
-            <span>Head Circle Size</span>
-            <div id="head-circle-size" class="on-off-toggle inactive" onclick="toggleFeature('head-circle-size')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Adjustable Head Circle Size</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Customize the size of the head circle.</div>
             </div>
-            <div class="feature-description">Adjust head circle size.</div>
-        </div>
-        <div>
-            <span>Color Change</span>
-            <div id="color-change" class="on-off-toggle inactive" onclick="toggleFeature('color-change')">
-                <span class="inactive">OFF</span>
+            <div>
+                <span>Visible & Invisible Color Change</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Change the color of visible and invisible enemies dynamically.</div>
             </div>
-            <div class="feature-description">Change colors dynamically.</div>
+            <div>
+                <span>FOV Circle Color Change</span>
+                <div class="toggle-text off" onclick="toggleFeature(this)">OFF</div>
+                <div class="feature-description">Customize the FOV circle color for better visual control.</div>
+            </div>
         </div>
     </div>
 </div>
@@ -332,25 +327,23 @@
 
     // Show Page Function
     function showPage(page) {
-        document.getElementById('aimbot').style.display = 'none';
-        document.getElementById('esp').style.display = 'none';
-        document.getElementById('misc').style.display = 'none';
-
-        document.getElementById(page).style.display = 'block';
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active-section');
+        });
+        document.getElementById(page).classList.add('active-section');
     }
 
     // Toggle Feature On/Off
-    function toggleFeature(id) {
-        const toggle = document.getElementById(id);
-        const span = toggle.querySelector('span');
-        if (toggle.classList.contains('inactive')) {
-            toggle.classList.remove('inactive');
-            toggle.classList.add('active');
-            span.textContent = 'ON';
+    function toggleFeature(element) {
+        if (element.classList.contains('off')) {
+            element.classList.remove('off');
+            element.classList.add('on');
+            element.textContent = 'ON';
         } else {
-            toggle.classList.remove('active');
-            toggle.classList.add('inactive');
-            span.textContent = 'OFF';
+            element.classList.remove('on');
+            element.classList.add('off');
+            element.textContent = 'OFF';
         }
     }
 </script>
